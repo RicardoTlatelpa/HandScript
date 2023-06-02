@@ -7,3 +7,6 @@ Handscript is a web application that creates a font file out of a user's handwri
 - https://gliffy.github.io/canvas2svg/
 
 - https://fonttools.readthedocs.io/en/latest/svgLib/path/index.html#module-fontTools.svgLib.path
+
+# Architecture
+![HandScript drawio](https://github.com/RicardoTlatelpa/HandScript/assets/19786880/15124998-4b47-43bf-898a-9dd7e4165164)
