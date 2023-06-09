@@ -11,4 +11,5 @@ Handscript is a web application that creates a font file out of a user's handwri
 - https://bootstrap-styled.github.io/v4/
 
 # Architecture
-![HandScript drawio](https://github.com/RicardoTlatelpa/HandScript/assets/19786880/8a28cc5c-fd80-4a1e-bf07-3e723f1b4ad1)
+
+![HandScript drawio (1)](https://github.com/RicardoTlatelpa/HandScript/assets/19786880/904e1908-552f-4f8f-9cb2-e797de8fc628)
