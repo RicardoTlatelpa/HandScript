@@ -1,10 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ClearButton from './ClearButton';
 
-const Canvas = ({clearCanvas}) => {
+const Canvas = () => {
     const canvasRef = useRef(null);
     const contextRef = useRef(null);
+
     const [isDrawing, setDrawingOrNot] = useState(false);
+    const [clearCanvas, setClearCanvas] = useState(false);
+
+    const handleClearCanvas = () => {
+        console.log("handled");
+        setClearCanvas(!clearCanvas);
+    };
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -62,12 +69,17 @@ const Canvas = ({clearCanvas}) => {
     };
 
     return (
-        <canvas
-        ref={canvasRef}
-        width={500}
-        height={300}
-        style={{ border: '1px solid #000000' }}
-        ></canvas>
+        <div>
+            <canvas
+                ref={canvasRef}
+                width={500}
+                height={300}
+                style={{ border: '1px solid #000000' }}
+            ></canvas>
+            <div>
+                <ClearButton onClear={handleClearCanvas}>Clear</ClearButton>
+            </div>
+        </div>
     );
 };
 
