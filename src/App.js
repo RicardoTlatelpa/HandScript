@@ -3,7 +3,6 @@ import Canvas from './Canvas';
 import ClearButton from './ClearButton';
 
 const App = () => {
-
     return(
         <>
         <h1> HandScript </h1>
