@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import Canvas from './Canvas';
 import ClearButton from './ClearButton';
+import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 
 const App = () => {
     return(
         <>
-        <h1> HandScript </h1>
+        <Router>
+            <Navbar />
+            <Routes>
+                <Route path ="/home" element ={<home/>} />
+            </Routes>
+        </Router>
         <Canvas />
         </>
     )
