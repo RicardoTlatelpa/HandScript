@@ -11,17 +11,17 @@ const Canvas = () => {
     return () => {
       canvas.dispose();
     };
-  }, []);
+  },[]);
 
   useEffect(() => {
-    if(canvas) {
+    if(canvas){
       canvas.isDrawingMode = true;
     }
     canvas.freeDrawingBrush.width = 5;
   },[]);
 
   const letterToSVG = () => {
-    if(canvas) {
+    if(canvas){
       const svg = canvas.toSVG();
       console.log(svg);
       canvas.clear();
@@ -29,7 +29,7 @@ const Canvas = () => {
   };
 
   const clearCanvas = () => {
-    if(canvas) {
+    if(canvas){
       canvas.clear();
     }
   };
