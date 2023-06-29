@@ -19,7 +19,7 @@
   }
   
   .navbar-logo {
-    color: #0000FF;
+    color: #FFFF;
     justify-self: start;
     margin-left: 20px;
     cursor: pointer;
@@ -50,7 +50,7 @@
   }
   
   .nav-links {
-    color: #FF3333;
+    color: #FFFF;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -131,7 +131,7 @@
     }
   
     .fa-times {
-      color: #FF3333;
+      color: #FFFF;
       font-size: 2rem;
     }
   
@@ -144,7 +144,7 @@
       text-decoration: none;
       font-size: 1.5rem;
       background-color: transparent;
-      color: #0000FF;
+      color: #ffff;
       padding: 14px 20px;
       border: 1px solid #000000;
       transition: all 0.3s ease-out;
