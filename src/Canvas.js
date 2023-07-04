@@ -29,14 +29,9 @@ const Canvas = () => {
 
   const letterToSVG = () => {
     if(canvasObjRef.current && index < alphabet.length){
-      //console.log(index);
       const svg = canvasObjRef.current.toSVG();
-      //console.log(svg);
       canvasObjRef.current.clear();
       addSVG(svg);
-      console.log(svgArray[0]);
-      console.log("LDSKJFLSDKJFSDL");
-      
       nextLetter();
     }
   };
@@ -63,7 +58,7 @@ const Canvas = () => {
       <canvas ref={canvasRef} width={"700"} height={"600"} style={{ border: '1px solid black' }} />
       <div>
         <ClearButton onClear={clearCanvas} />
-        <button onClick={letterToSVG}>Next Letter</button>
+        <button id="next-letter-button" onClick={letterToSVG}>Next Letter</button>
       </div>
     </div>
   );

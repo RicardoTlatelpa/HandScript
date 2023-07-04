@@ -1,0 +1,14 @@
+button{
+    margin-top: 15px;
+}
+
+#next-letter-button{
+    margin-left: 20px;
+    height: 40px;
+}
+
+#clear-button{
+    margin-left: 10px;
+    height: 40px;
+    width: 60px;
+}
