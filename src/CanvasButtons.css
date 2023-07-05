@@ -3,12 +3,18 @@ button{
 }
 
 #next-letter-button{
-    margin-left: 20px;
+    margin-left: 10px;
     height: 40px;
 }
 
 #clear-button{
-    margin-left: 10px;
+    margin-left: 15px;
+    height: 40px;
+    width: 60px;
+}
+
+#finish-button{
+    margin-left: 15px;
     height: 40px;
     width: 60px;
 }

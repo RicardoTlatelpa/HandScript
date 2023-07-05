@@ -2,6 +2,8 @@ import React, {useEffect, useRef, useState} from 'react';
 import { fabric } from 'fabric';
 import ClearButton from './ClearButton';
 import LetterPrompt from './LetterPrompt';
+import FinishButton from './FinishButton';
+import axios from 'axios';
 import './LetterPrompt.css'
 
 const Canvas = () => {
@@ -52,6 +54,15 @@ const Canvas = () => {
     setIndex(nextIndex);
   };
 
+  const svgArrayToBackEnd = async(theSVGArray) => {
+    try{
+      const response = await axios.post('/api/svgArray', { theSVGArray: svgArray });
+      console.log(response.data);
+    }catch(error){
+      console.error(error);
+    }
+  }
+
   return(
     <div>
       <LetterPrompt currentLetter={currentLetter} />
@@ -59,6 +70,7 @@ const Canvas = () => {
       <div>
         <ClearButton onClear={clearCanvas} />
         <button id="next-letter-button" onClick={letterToSVG}>Next Letter</button>
+        <FinishButton onClick={ () => svgArrayToBackEnd(svgArray)}></FinishButton>
       </div>
     </div>
   );
