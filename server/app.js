@@ -1,15 +1,26 @@
 const express = require('express');
-const bodyParser = require('body-parser'); // decoding data from user requests
 const PORT = 3001;
 const app = express()
+const multer = require('multer');
 
-app.use(bodyParser.json());
+var storage = multer.diskStorage(
+  {
+      destination: 'fonts/',
+      filename: function ( req, file, cb ) {
+          //req.body is empty...
+          //How could I get the new_file_name property sent from client here?
+          cb( null, file.originalname+ '-' + Date.now()+".svg");
+      }
+  }
+);
+
+var upload = multer( { storage: storage } );
+
 app.get('/', (req,res)=>{
   res.send('Handscript server');
 })
 
-app.post('/handleLC',(req,res)=>{
-  console.log(req.body);
+app.post('/handleLC',upload.single('file'),(req,res)=>{  
   res.sendStatus(200);
 } )
 
