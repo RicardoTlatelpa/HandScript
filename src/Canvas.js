@@ -1,3 +1,4 @@
+const axios = require('axios');
 import React, {useEffect, useRef, useState} from 'react';
 import { fabric } from 'fabric';
 import ClearButton from './ClearButton';
@@ -34,7 +35,8 @@ const Canvas = () => {
       canvasObjRef.current.clear();
       addSVG(svg);
       // make a post request to server
-      console.log(svg)
+      const blob = new Blob([svg], { type: 'image/svg+xml' });
+      console.log(blob);
       nextLetter();
     }
   };
