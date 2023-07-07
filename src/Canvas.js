@@ -28,14 +28,28 @@ const Canvas = () => {
     }
   },[]);
 
+  const sendSVGtoServer = (svg) => {
+    // make a post request to server
+    // 1. create file data for server
+    const blob = new Blob([svg], { type: 'image/svg+xml' });
+    const formData = new FormData();
+    formData.append('file', blob, `${alphabet[index]}.svg`);
+    // 2. send data to server
+    axios.post('/handleLC', formData)
+    .then(response => {
+      console.log(response.data); // Log the response from the server
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  }
+
   const letterToSVG = () => {
     if(canvasObjRef.current && index < alphabet.length){
       const svg = canvasObjRef.current.toSVG();
       canvasObjRef.current.clear();
       addSVG(svg);
-      // make a post request to server
-      const blob = new Blob([svg], { type: 'image/svg+xml' });
-      console.log(blob);
+      sendSVGtoServer(svg);
       nextLetter();
     }
   };
