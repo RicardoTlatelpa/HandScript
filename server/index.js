@@ -5,7 +5,7 @@ const multer = require('multer');
 
 var storage = multer.diskStorage(
   {
-      destination: 'fonts/',
+      destination: './server/fonts',
       filename: function ( req, file, cb ) {
           //req.body is empty...
           //How could I get the new_file_name property sent from client here?
