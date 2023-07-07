@@ -34,7 +34,7 @@ const Canvas = () => {
       canvasObjRef.current.clear();
       addSVG(svg);
       // make a post request to server
-      
+      console.log(svg)
       nextLetter();
     }
   };
