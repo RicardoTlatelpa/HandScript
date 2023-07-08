@@ -13,7 +13,7 @@ function Cards() {
                     src="images/smile1.gif"
                     text="Handscript let's you create your own font whenever you want!"
                     label = 'Fonts'
-                    path ='/About'
+                    path ='/getstarted'
                     />
                 </ul>
             </div>
