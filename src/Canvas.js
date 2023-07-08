@@ -3,14 +3,17 @@ import { fabric } from 'fabric';
 import ClearButton from './ClearButton';
 import LetterPrompt from './LetterPrompt';
 import FinishButton from './FinishButton';
+import StrokeSizeSlider from './StrokeSizeSlider';
 import axios from 'axios';
 import './LetterPrompt.css'
+import './Canvas.css'
 
 const Canvas = () => {
   const alphabet = ['a','A','b','B','c','C','d','D','e','E','f','F','g','G','h','H','i','I','j','J','k','K','l','L','m','M','n','N','o','O','p','P','q','Q','r','R','s','S','t','T','u','U','v','V','w','W','x','X','y','Y','z','Z'];
   const [index, setIndex] = useState(0);
   const [currentLetter, setCurrentLetter] = useState(alphabet[index]);
   const [svgArray, setSVG] = useState([]);
+  const [strokeSize, setStrokeSize] = useState('');
 
   const canvasRef = useRef(null);
   const canvasObjRef = useRef(null);
@@ -63,14 +66,24 @@ const Canvas = () => {
     }
   }
 
+  const changeStrokeSize = (e) => {
+    const userStrokeSize = Number(e.target.value);
+    setStrokeSize(userStrokeSize);
+    canvasObjRef.current.freeDrawingBrush.width = userStrokeSize;
+  }
+
   return(
     <div>
-      <LetterPrompt currentLetter={currentLetter} />
-      <canvas ref={canvasRef} width={"700"} height={"600"} style={{ border: '1px solid black' }} />
-      <div>
-        <ClearButton onClear={clearCanvas} />
-        <button id="next-letter-button" onClick={letterToSVG}>Next Letter</button>
-        <FinishButton onClick={ () => svgArrayToBackEnd(svgArray)}></FinishButton>
+      <div id="canvas-div">
+        <LetterPrompt currentLetter={currentLetter} />
+        <canvas id="canvas" ref={canvasRef} width={"1000"} height={"550"} style={{ border: '1px solid #DCDCDC', borderRadius: 
+        '10px', boxShadow: "1px 1px 4px #888888"}}/>
+        <div id="canvas-button-div">
+          <ClearButton onClear={clearCanvas} />
+          <button id="next-letter-button" onClick={letterToSVG}>Next Letter</button>
+          <FinishButton onClick={ () => svgArrayToBackEnd(svgArray)}></FinishButton>
+          <StrokeSizeSlider onStrokeChange={changeStrokeSize}/>
+        </div>
       </div>
     </div>
   );

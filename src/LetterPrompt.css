@@ -1,5 +1,8 @@
 #letter-prompt{
-    font-size: 20px;
+    font-size: 18px;
+    font-family: "PT Sans";
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #changing-letter{
