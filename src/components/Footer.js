@@ -43,7 +43,6 @@ function Footer() {
             <h2>Social Media</h2>
             <Link to='/'>Instagram</Link>
             <Link to='/'>Facebook</Link>
-            <Link to='/'>Youtube</Link>
             <Link to='/'>Twitter</Link>
           </div>
         </div>
@@ -73,14 +72,6 @@ function Footer() {
               aria-label='Instagram'
             >
               <i class='fab fa-instagram' />
-            </Link>
-            <Link
-              class='social-icon-link youtube'
-              to='/'
-              target='_blank'
-              aria-label='Youtube'
-            >
-              <i class='fab fa-youtube' />
             </Link>
             <Link
               class='social-icon-link twitter'
