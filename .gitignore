@@ -4,6 +4,8 @@
 /server/node_modules
 /server/fonts/
 /node_modules
+/server/node_modules
+/server/fonts/
 /.pnp
 .pnp.js
 
