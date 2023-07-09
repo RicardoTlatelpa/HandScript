@@ -5,8 +5,8 @@ import LetterPrompt from './LetterPrompt';
 import './LetterPrompt.css'
 import axios from 'axios';
 const Canvas = () => {
-  const alphabet = ['a','A','b','B','c','C','d','D','e','E','f','F','g','G','h','H','i','I','j','J','k','K','l','L','m','M','n','N','o','O','p','P','q','Q','r','R','s','S','t','T','u','U','v','V','w','W','x','X','y','Y','z','Z']; 
-  // const alphabet = ['a','b','c']; // for testing backend
+  //const alphabet = ['a','A','b','B','c','C','d','D','e','E','f','F','g','G','h','H','i','I','j','J','k','K','l','L','m','M','n','N','o','O','p','P','q','Q','r','R','s','S','t','T','u','U','v','V','w','W','x','X','y','Y','z','Z']; 
+  const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];   
   const [index, setIndex] = useState(0);
   const [currentLetter, setCurrentLetter] = useState(alphabet[index]);
   const [svgArray, setSVG] = useState([]);
@@ -98,30 +98,26 @@ const Canvas = () => {
    }
   }
 
-  const sendJsontoServer = (json) => {    
-    axios.post('/handleLC', json, {
+  const sendJsontoServer = async(json) => {    
+    return await axios.post('/handleLC', json, {
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      responseType: 'arraybuffer'
     })
-      .then(response=>{
-        console.log(response.data)
-      })
-      .catch(err=>{
-        console.error(err);
-      })
   }
 
-  const letterToSVG = () => {
+  const letterToSVG = async () => {
     console.log(svgArray, usvgArray);
     let lastSVG = '';
     if(canvasObjRef.current && index < alphabet.length){
       lastSVG = canvasObjRef.current.toSVG();
       canvasObjRef.current.clear();  
+      const uni = unicode[alphabet[index]]
       if(checkCase(alphabet[index])){
-        addUSVG(lastSVG);
+        addUSVG(lastSVG,uni);
       }else{
-        addSVG(lastSVG);          
+        addSVG(lastSVG,uni);          
       }
       nextLetter(); // increments index
     }
@@ -130,30 +126,35 @@ const Canvas = () => {
       // 1. send svg files to server
       let lowercaseshipment = []
       let uppercaseshipment = []
-      let filler =['','','','','',''];
+      
       usvgArray.map(x => {
         return uppercaseshipment.push(x);
       })
       svgArray.map(x =>{
         return lowercaseshipment.push(x);
       })
-      //lowercaseshipment.push(lastSVG); // for lower case tests
-      uppercaseshipment.push(lastSVG);
-      console.log(lowercaseshipment)
-      console.log(uppercaseshipment)
-      console.log(filler)
-      uppercaseshipment = uppercaseshipment.concat(filler);
-      uppercaseshipment = uppercaseshipment.concat(lowercaseshipment);            
-      let json = {shipment: uppercaseshipment}
+      lowercaseshipment.push([lastSVG, unicode[alphabet[index]]]); // for lower case tests
+      // const filler = [['','5'],['','6'],['','4'],['','3'],['','2'],['','1']]      
+      // uppercaseshipment.push([lastSVG, unicode[alphabet[index]]]);            
+      // uppercaseshipment = uppercaseshipment.concat(filler);
+      // uppercaseshipment = uppercaseshipment.concat(lowercaseshipment);            
+      let json = {shipment: lowercaseshipment}
       console.log(json);
-      sendJsontoServer(json);
+      const results = await sendJsontoServer(json); 
+      const blob = new Blob([results.data], {type: 'font/ttf'})
+      let hidden_a = document.createElement('a');
+      hidden_a.href = window.URL.createObjectURL(blob);
+      hidden_a.setAttribute('download', 'HandScripts.ttf');
+      document.body.appendChild(hidden_a);
+      hidden_a.click();
+
     }
   };
-  const addUSVG = (theSVG) => {
-    setUSVG(prevSVGArray => [...prevSVGArray, theSVG]);
+  const addUSVG = (theSVG,unicode) => {
+    setUSVG(prevSVGArray => [...prevSVGArray, [theSVG,unicode]]);
   }
-  const addSVG = (theSVG) => {
-    setSVG(prevSVGArray => [...prevSVGArray, theSVG]);
+  const addSVG = (theSVG,unicode) => {
+    setSVG(prevSVGArray => [...prevSVGArray, [theSVG,unicode]]);
   }
 
   const clearCanvas = () => {
