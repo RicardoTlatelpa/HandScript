@@ -9,28 +9,6 @@ const fs_extra = require('fs-extra');
 const bodyParser = require('body-parser');
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
-//app.use(bodyParser.json());
-// var temp = require('temp'),
-//     fs   = require('fs'),
-//     util = require('util'),
-
-//     exec = require('child_process').exec;
- 
-// temp.track();
-
-//Multer implementation
-// var storage = multer.diskStorage(
-//   {
-//       destination: `./server/${directoryName}`,
-//       filename: function ( req, file, cb ) {
-//           //req.body is empty...
-//           //How could I get the new_file_name property sent from client here?
-//           cb( null, file.originalname+'-'+".svg");
-//       }
-//   }
-// );
-
-//var upload = multer();
 
 app.get('/', (req,res)=>{
   res.send('Handscript server');
@@ -83,6 +61,7 @@ app.post('/handleLC',bodyParser.json(),(req,res)=>{
   });
 
   // 4.send appropriate font files to user
+  // STILL UNDER CONSTRUCTION, SVGTOFONT needs better unicode mapping
     
   // 5.delete any directories created
   // fs_extra.remove(directoryPath)
