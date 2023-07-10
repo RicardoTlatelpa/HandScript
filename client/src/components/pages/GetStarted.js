@@ -22,7 +22,10 @@ function GetStarted() {
   </div>
   <Footer />
   </> */
+  <>
   <Canvas/>
+  <Footer/>
+  </>
   );
  
 
