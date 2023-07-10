@@ -1,11 +1,12 @@
 import React from 'react';
 import '../../App.css';
 import Footer from '../Footer';
+import Canvas from '../../Canvas.js';
 
 
 function GetStarted() {
   return (
-    <>
+   /* <>
   <div className='getstarted'>
     <ul>
     <h1>WHAT IS HANDSCRIPT?
@@ -20,7 +21,8 @@ function GetStarted() {
 
   </div>
   <Footer />
-  </> 
+  </> */
+  <Canvas/>
   );
  
 

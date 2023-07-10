@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import Canvas from './Canvas';
-import ClearButton from './ClearButton';
 import Navbar from './components/Navbar';
 import './App.css';
 import Home from './components/pages/Home';
 import GetStarted from './components/pages/GetStarted';
 import About from './components/pages/About';
 import SignUp from './components/pages/SignUp';
-import LetterPrompt from './LetterPrompt.js'
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 
@@ -23,7 +21,6 @@ function App () {
             <Route exact path='/sign-up' element={<SignUp/>} />
             </Routes>
         </Router>
-        <Canvas />
         </>
     )
 }
