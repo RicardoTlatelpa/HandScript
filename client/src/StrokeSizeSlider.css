@@ -1,9 +1,16 @@
 #stroke-size-text{
-    margin-right: 7px;
+    margin-right: 2px;
     margin-left: 20px;
     margin-top: 10px;
+    font-family: "PT Sans";
 }
 
 #stroke-size-slider{
     margin-top: 10px;
+}
+
+.stroke-slider-div{
+    display: flex;
+    align-items: center;
+    height: 40px;
 }

@@ -2,12 +2,14 @@
     margin-left: 10px;
     height: 40px;
     width: 90px;
+    font-family: "PT Sans";
 }
 
 #clear-button{
     margin-left: 15px;
     height: 40px;
     width: 60px;
+    font-family: "PT Sans";
 }
 
 #finish-button{
@@ -17,8 +19,16 @@
 }
 
 #canvas-button-div {
-    margin-top: 10px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     margin-bottom: 50px;
+  }
+
+  #clear-button:hover{
+    cursor: pointer;
+  }
+
+  #next-letter-button:hover{
+    cursor: pointer;
   }

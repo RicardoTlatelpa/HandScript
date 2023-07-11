@@ -30,7 +30,7 @@ function SignUp (){
 					<small></small>
 				</div>
 				<div class="field">
-					<button type="submit" class="full">Register</button>
+					<button id="register-button" type="submit" class="full">Register</button>
 				</div>
 			</form>
 		</div>

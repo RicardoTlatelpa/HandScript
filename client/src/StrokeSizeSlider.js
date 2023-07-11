@@ -3,7 +3,7 @@ import './StrokeSizeSlider.css'
 
 const StrokeSizeSlider = ({value, onStrokeChange}) => {
   return (
-    <div>
+    <div className = "stroke-slider-div">
         <label id="stroke-size-text">Stroke Size:</label>
         <input id="stroke-size-slider" type="range" min="1" max="25" value={value} onChange={onStrokeChange}/>
     </div>
