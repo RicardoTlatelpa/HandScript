@@ -169,9 +169,9 @@ const Canvas = () => {
   };
 
   const nextLetter = () => {
-    let nextIndex = index + 1;
-    setCurrentLetter(alphabet[nextIndex]);
-    setIndex(nextIndex);
+      let nextIndex = index + 1;
+      setCurrentLetter(alphabet[nextIndex]);
+      setIndex(nextIndex);
   };
 
   const svgArrayToBackEnd = async(theSVGArray) => {
@@ -198,7 +198,6 @@ const Canvas = () => {
         <div id="canvas-button-div">
           <ClearButton onClear={clearCanvas} />
           <button id="next-letter-button" onClick={letterToSVG}>Next Letter</button>
-          <FinishButton onClick={ () => svgArrayToBackEnd(svgArray)}></FinishButton>
           <StrokeSizeSlider onStrokeChange={changeStrokeSize}/>
         </div>
       </div>
