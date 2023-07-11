@@ -13,7 +13,7 @@ function About() {
         Handscript is an app that let's you create your own font!
       </p> 
       <p>
-      <img src="images/tablet2.jpg" alt="tablet" class="center" style={{width: '1000px', height: '500px',}}/>
+      <img src="images/tablet2.jpg" alt="tablet" class="center" style={{width: '1000px', height: '470px',}}/>
       </p>
       </ul>
 
