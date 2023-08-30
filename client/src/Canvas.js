@@ -9,8 +9,7 @@ import './LetterPrompt.css'
 import './Canvas.css'
 
 const Canvas = () => {
-  //const alphabet = ['a','A','b','B','c','C','d','D','e','E','f','F','g','G','h','H','i','I','j','J','k','K','l','L','m','M','n','N','o','O','p','P','q','Q','r','R','s','S','t','T','u','U','v','V','w','W','x','X','y','Y','z','Z']; 
-  const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];   
+  // canvas page states  
   const [index, setIndex] = useState(0);
   const [currentLetter, setCurrentLetter] = useState(alphabet[index]);
   const [svgArray, setSVG] = useState([]);
@@ -19,7 +18,10 @@ const Canvas = () => {
 
   const canvasRef = useRef(null);
   const canvasObjRef = useRef(null);
-
+  
+  // variable definitions
+  //const alphabet = ['a','A','b','B','c','C','d','D','e','E','f','F','g','G','h','H','i','I','j','J','k','K','l','L','m','M','n','N','o','O','p','P','q','Q','r','R','s','S','t','T','u','U','v','V','w','W','x','X','y','Y','z','Z']; 
+  const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];   
   const unicode = {
     'A': '0x0041',
     'B': '0x0042',
@@ -88,7 +90,8 @@ const Canvas = () => {
       canvasObjRef.current.freeDrawingBrush.width = 5;
     }
   },[]);
-
+  
+  // helper function
   const checkCase = (ch) =>{
     if (!isNaN(ch * 1)){
       return 'ch is numeric';
@@ -102,7 +105,8 @@ const Canvas = () => {
       }
    }
   }
-
+  
+  // API functionalities
   const sendJsontoServer = async(json) => {    
     return await axios.post('/handleLC', json, {
       headers: {
@@ -155,12 +159,15 @@ const Canvas = () => {
 
     }
   };
+  
   const addUSVG = (theSVG,unicode) => {
     setUSVG(prevSVGArray => [...prevSVGArray, [theSVG,unicode]]);
   }
   const addSVG = (theSVG,unicode) => {
     setSVG(prevSVGArray => [...prevSVGArray, [theSVG,unicode]]);
   }
+
+  // Canvas functionalities
 
   const clearCanvas = () => {
     if(canvasObjRef.current){
@@ -174,14 +181,6 @@ const Canvas = () => {
       setIndex(nextIndex);
   };
 
-  const svgArrayToBackEnd = async(theSVGArray) => {
-    try{
-      const response = await axios.post('/api/svgArray', { theSVGArray: svgArray });
-      console.log(response.data);
-    }catch(error){
-      console.error(error);
-    }
-  }
 
   const changeStrokeSize = (e) => {
     const userStrokeSize = Number(e.target.value);
