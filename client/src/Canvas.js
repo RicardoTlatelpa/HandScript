@@ -92,6 +92,11 @@ const Canvas = () => {
     }
   },[]);
   
+  const canvgConverter = () =>{
+    const canvas = document.getElementById('canvasElement');
+    const svgString = Canvg(canvas).svg();
+    console.log(svgString);
+  }
   // helper function
   const checkCase = (ch) =>{
     // returns true if uppercase, false if lowercase
