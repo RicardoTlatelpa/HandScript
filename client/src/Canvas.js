@@ -16,8 +16,7 @@ const Canvas = () => {
   const [currentLetter, setCurrentLetter] = useState(alphabet[index]);
   const [svgArray, setSVG] = useState([]);
   const [strokeSize, setStrokeSize] = useState('');
-  const [usvgArray, setUSVG] = useState([]);
-
+  const [usvgArray, setUSVG] = useState([]);  
   const canvasRef = useRef(null);
   const canvasObjRef = useRef(null);
   
@@ -83,7 +82,7 @@ const Canvas = () => {
     canvasObjRef.current = new fabric.Canvas(canvasRef.current);
     return () => {
       canvasObjRef.current.dispose();
-    };
+    };    
   },[]);
 
   useEffect(() => {
@@ -95,6 +94,7 @@ const Canvas = () => {
   
   // helper function
   const checkCase = (ch) =>{
+    // returns true if uppercase, false if lowercase
     if (!isNaN(ch * 1)){
       return 'ch is numeric';
    }
@@ -145,23 +145,31 @@ const Canvas = () => {
       hidden_a.click();
   }
 
+  const isCanvasBlank = () =>{
+    const canvas = document.getElementById("canvas");
+    return !canvas.getContext('2d')
+      .getImageData(0, 0, canvas.width, canvas.height).data
+      .some(channel => channel !== 0);
+  }
+
   const letterToSVG = async () => {
-    console.log(svgArray, usvgArray);
+    //console.log(svgArray, usvgArray); //logging the svg array states
     let lastSVG = '';
-    if(canvasObjRef.current && index < alphabet.length){
-      lastSVG = canvasObjRef.current.toSVG();
-      canvasObjRef.current.clear();  
+    console.log(canvasObjRef.current);
+    if(isCanvasBlank() === false && index === (alphabet.length-1)){
+      await handleServerPost(lastSVG);
+    }
+    if(isCanvasBlank() === false && index < alphabet.length){
+      nextLetter(); // increments index
       const uni = unicode[alphabet[index]]
+      lastSVG = canvasObjRef.current.toSVG();
+      canvasObjRef.current.clear();        
       if(checkCase(alphabet[index])){
         addUSVG(lastSVG,uni);
       }else{
         addSVG(lastSVG,uni);          
-      }
-      nextLetter(); // increments index
-    }
-    if(index === (alphabet.length-1)){
-      await handleServerPost(lastSVG);
-    }
+      }      
+    }    
   };
   
   const addUSVG = (theSVG,unicode) => {
