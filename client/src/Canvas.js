@@ -10,6 +10,8 @@ import './Canvas.css'
 
 const Canvas = () => {
   // canvas page states  
+  const alphabet = ['a'];
+  //const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];   
   const [index, setIndex] = useState(0);
   const [currentLetter, setCurrentLetter] = useState(alphabet[index]);
   const [svgArray, setSVG] = useState([]);
@@ -21,7 +23,7 @@ const Canvas = () => {
   
   // variable definitions
   //const alphabet = ['a','A','b','B','c','C','d','D','e','E','f','F','g','G','h','H','i','I','j','J','k','K','l','L','m','M','n','N','o','O','p','P','q','Q','r','R','s','S','t','T','u','U','v','V','w','W','x','X','y','Y','z','Z']; 
-  const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];   
+  
   const unicode = {
     'A': '0x0041',
     'B': '0x0042',
@@ -116,22 +118,7 @@ const Canvas = () => {
     })
   }
 
-  const letterToSVG = async () => {
-    console.log(svgArray, usvgArray);
-    let lastSVG = '';
-    if(canvasObjRef.current && index < alphabet.length){
-      lastSVG = canvasObjRef.current.toSVG();
-      canvasObjRef.current.clear();  
-      const uni = unicode[alphabet[index]]
-      if(checkCase(alphabet[index])){
-        addUSVG(lastSVG,uni);
-      }else{
-        addSVG(lastSVG,uni);          
-      }
-      nextLetter(); // increments index
-    }
-    if(index === (alphabet.length-1)){
-      console.log("finished")
+  const handleServerPost = async(lastSVG) =>{    
       // 1. send svg files to server
       let lowercaseshipment = []
       let uppercaseshipment = []
@@ -156,7 +143,24 @@ const Canvas = () => {
       hidden_a.setAttribute('download', 'HandScripts.ttf');
       document.body.appendChild(hidden_a);
       hidden_a.click();
+  }
 
+  const letterToSVG = async () => {
+    console.log(svgArray, usvgArray);
+    let lastSVG = '';
+    if(canvasObjRef.current && index < alphabet.length){
+      lastSVG = canvasObjRef.current.toSVG();
+      canvasObjRef.current.clear();  
+      const uni = unicode[alphabet[index]]
+      if(checkCase(alphabet[index])){
+        addUSVG(lastSVG,uni);
+      }else{
+        addSVG(lastSVG,uni);          
+      }
+      nextLetter(); // increments index
+    }
+    if(index === (alphabet.length-1)){
+      await handleServerPost(lastSVG);
     }
   };
   
