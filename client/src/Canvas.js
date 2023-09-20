@@ -154,8 +154,7 @@ const Canvas = () => {
 
   const letterToSVG = async () => {
     //console.log(svgArray, usvgArray); //logging the svg array states
-    let lastSVG = '';
-    console.log(canvasObjRef.current);
+    let lastSVG = '';    
     if(isCanvasBlank() === false && index === (alphabet.length-1)){
       await handleServerPost(lastSVG);
     }
