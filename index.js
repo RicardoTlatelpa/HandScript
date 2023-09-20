@@ -75,7 +75,7 @@ app.post('/handleLC',bodyParser.json(),(req,res)=>{
     res.sendFile(download);
     console.log('Finished');
     
-    // 5.delete any directories created
+    //5.delete any directories created
     fs_extra.remove(directoryPath)
     .then(()=>{
       console.log('Directory deleted successfully');
