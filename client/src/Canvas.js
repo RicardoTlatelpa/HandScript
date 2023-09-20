@@ -154,12 +154,8 @@ const Canvas = () => {
 
   const letterToSVG = async () => {
     //console.log(svgArray, usvgArray); //logging the svg array states
-    let lastSVG = '';    
-    if(isCanvasBlank() === false && index === (alphabet.length-1)){
-      await handleServerPost(lastSVG);
-    }
-    if(isCanvasBlank() === false && index < alphabet.length){
-      nextLetter(); // increments index
+    let lastSVG = '';        
+    if(isCanvasBlank() === false && index < alphabet.length){      
       const uni = unicode[alphabet[index]]
       lastSVG = canvasObjRef.current.toSVG();
       canvasObjRef.current.clear();        
@@ -168,7 +164,13 @@ const Canvas = () => {
       }else{
         addSVG(lastSVG,uni);          
       }      
-    }    
+      if(index === (alphabet.length-1)){
+        // lock canvas --> handle server post
+        await handleServerPost(lastSVG);
+      } 
+      nextLetter(); // increments index
+    }   
+    
   };
   
   const addUSVG = (theSVG,unicode) => {
