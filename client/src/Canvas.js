@@ -93,7 +93,7 @@ const Canvas = () => {
   },[]);
   
   const canvgConverter = () =>{
-    const canvas = document.getElementById('canvasElement');
+    const canvas = document.getElementById('canvas');
     const svgString = Canvg(canvas).svg();
     console.log(svgString);
   }
@@ -163,6 +163,7 @@ const Canvas = () => {
     if(isCanvasBlank() === false && index < alphabet.length){      
       const uni = unicode[alphabet[index]]
       lastSVG = canvasObjRef.current.toSVG();
+      canvgConverter();
       canvasObjRef.current.clear();        
       if(checkCase(alphabet[index])){
         addUSVG(lastSVG,uni);
