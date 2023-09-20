@@ -2,9 +2,9 @@ import React, {useEffect, useRef, useState} from 'react';
 import { fabric } from 'fabric';
 import ClearButton from './ClearButton';
 import LetterPrompt from './LetterPrompt';
-import FinishButton from './FinishButton';
 import StrokeSizeSlider from './StrokeSizeSlider';
 import axios from 'axios';
+import { Canvg } from 'canvg';
 import './LetterPrompt.css'
 import './Canvas.css'
 
