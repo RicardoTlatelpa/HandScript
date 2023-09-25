@@ -188,7 +188,7 @@ const Canvas = () => {
     if(isCanvasBlank() === false && index < alphabet.length){      
       const uni = unicode[alphabet[index]]
       lastSVG = canvasObjRef.current.toSVG();
-      console.log(canvasToSVG);
+      console.log(canvasToSVG());
       canvasObjRef.current.clear();        
       if(checkCase(alphabet[index])){
         addUSVG(lastSVG,uni);
