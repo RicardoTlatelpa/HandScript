@@ -2,7 +2,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import { fabric } from 'fabric';
 import ClearButton from './ClearButton';
 import LetterPrompt from './LetterPrompt';
-import FinishButton from './FinishButton';
 import StrokeSizeSlider from './StrokeSizeSlider';
 import axios from 'axios';
 import './LetterPrompt.css'
@@ -10,8 +9,8 @@ import './Canvas.css'
 
 const Canvas = () => {
   // canvas page states  
-  //const alphabet = ['a'];
-  const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];   
+  const alphabet = ['a'];
+  //const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];   
   const [index, setIndex] = useState(0);
   const [currentLetter, setCurrentLetter] = useState(alphabet[index]);
   const [svgArray, setSVG] = useState([]);
@@ -152,43 +151,14 @@ const Canvas = () => {
       .some(channel => channel !== 0);
   }
   
-  function canvasToSVG(canvas) {
-    // Create an SVG element
-    var canvas = document.getElementById('canvas');
-    console.log(canvas);
-    var svg = null;
-    if (canvas){
-      svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      svg.setAttribute("width", canvas.width);
-      svg.setAttribute("height", canvas.height);
-      
-      // Get the canvas data as an image
-      var image = new Image();
-      image.src = canvas.toDataURL("image/png");
-    
-      // Create an SVG image element
-      var svgImage = document.createElementNS("http://www.w3.org/2000/svg", "image");
-      svgImage.setAttribute("x", 0);
-      svgImage.setAttribute("y", 0);
-      svgImage.setAttribute("width", canvas.width);
-      svgImage.setAttribute("height", canvas.height);
-      svgImage.setAttributeNS("http://www.w3.org/1999/xlink", "href", image.src);
-    
-      // Append the image element to the SVG
-      svg.appendChild(svgImage);
-    }
-    
-  
-    return svg;
-  }
+ 
 
 
   const letterToSVG = async () => {    
     let lastSVG = '';        
     if(isCanvasBlank() === false && index < alphabet.length){      
       const uni = unicode[alphabet[index]]
-      lastSVG = canvasObjRef.current.toSVG();
-      console.log(canvasToSVG());
+      lastSVG = canvasObjRef.current.toSVG();            
       canvasObjRef.current.clear();        
       if(checkCase(alphabet[index])){
         addUSVG(lastSVG,uni);
