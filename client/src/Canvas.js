@@ -99,10 +99,10 @@ const Canvas = () => {
       return 'ch is numeric';
    }
     else {
-      if (ch == ch.toUpperCase()) {
+      if (ch === ch.toUpperCase()) {
          return true;
       }
-      if (ch == ch.toLowerCase()){
+      if (ch === ch.toLowerCase()){
          return false;
       }
    }
@@ -151,13 +151,44 @@ const Canvas = () => {
       .getImageData(0, 0, canvas.width, canvas.height).data
       .some(channel => channel !== 0);
   }
+  
+  function canvasToSVG(canvas) {
+    // Create an SVG element
+    var canvas = document.getElementById('canvas');
+    console.log(canvas);
+    var svg = null;
+    if (canvas){
+      svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("width", canvas.width);
+      svg.setAttribute("height", canvas.height);
+      
+      // Get the canvas data as an image
+      var image = new Image();
+      image.src = canvas.toDataURL("image/png");
+    
+      // Create an SVG image element
+      var svgImage = document.createElementNS("http://www.w3.org/2000/svg", "image");
+      svgImage.setAttribute("x", 0);
+      svgImage.setAttribute("y", 0);
+      svgImage.setAttribute("width", canvas.width);
+      svgImage.setAttribute("height", canvas.height);
+      svgImage.setAttributeNS("http://www.w3.org/1999/xlink", "href", image.src);
+    
+      // Append the image element to the SVG
+      svg.appendChild(svgImage);
+    }
+    
+  
+    return svg;
+  }
 
-  const letterToSVG = async () => {
-    //console.log(svgArray, usvgArray); //logging the svg array states
+
+  const letterToSVG = async () => {    
     let lastSVG = '';        
     if(isCanvasBlank() === false && index < alphabet.length){      
       const uni = unicode[alphabet[index]]
       lastSVG = canvasObjRef.current.toSVG();
+      console.log(canvasToSVG);
       canvasObjRef.current.clear();        
       if(checkCase(alphabet[index])){
         addUSVG(lastSVG,uni);
