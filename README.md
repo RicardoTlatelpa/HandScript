@@ -1,6 +1,8 @@
 # HandScript
 Handscript is a web application that creates a font file out of a user's handwriting!
 
+[Visit Project](https://handscripts-c2b15a4db788.herokuapp.com/)
+
 # API's/Libraries
 - https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
 
